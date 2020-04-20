@@ -18,20 +18,29 @@ const CountryPicker = ({ handleCountryChange }) => {
     getCountries();
   }, [setFetchedCountries]);
 
-  const options = fetchedCountries.map((country) => ({
+  let options = fetchedCountries.map((country) => ({
     name: country,
     value: country,
   }));
+
+  options = [
+    ...options,
+    {
+      name: 'Global',
+      value: '',
+    },
+  ];
 
   return (
     <div>
       <SelectSearch
         options={options}
-        defaultValue="sv"
+        defaultValue=""
         name="country"
         placeholder="Choose your country"
         autoComplete="on"
         search={true}
+        onChange={(value) => handleCountryChange(value)}
       />
       <FormControl className={styles.formControl}>
         <NativeSelect
